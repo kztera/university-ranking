@@ -1,7 +1,9 @@
 [^header]: Created by [@kztera](https://github.com/kztera) and [@IrisLe2003](https://github.com/IrisLe2003) on 20/04/2023
 [^header]: Repo made for weekly exercises for CS321
 
-<h1>University Rankings</h1>
+<h1>World University Rankings</h1>
+
+> Thu thập, phân tích và trực quan hóa dữ liệu từ timeshighereducation.com về Xếp hạng Đại học Thế giới
 
 <h2> Table of Contents </h2>
 
