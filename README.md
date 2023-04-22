@@ -163,6 +163,7 @@ Tuy nhiên từ Selenium4 trở đi, `executable_path` đã không còn được
 from selenium.webdriver.chrome.service import Service
 
 service = Service(executable_path=webdriver_path)
+````
 
 Sau khi đã có được `webdriver`, chúng ta cần xác định những địa chỉ web sẽ sử dụng. Kiểm tra nhanh địa chỉ web mục tiêu cho thấy việc thay đổi giá trị tham số `length` thành `-1` sẽ dẫn đến việc có được trang web chứa tất cả các trường đại học thay vì chỉ 25 trên mỗi trang web như những gì mặc định mà ta thấy ở bên trên. Bên cạnh đó, bảng xếp hạng còn được chia thành 2 tab `Socre` và `Ranking` với nhiều dữ liệu hơn. Chúng ta sẽ lấy dữ liệu từ cả 2 tab này.
 
