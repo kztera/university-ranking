@@ -1,4 +1,4 @@
-rank,name,country,number_of_students,student_per_staff,international_students,famale_male_ratio,overall_score,teaching_score,research_score,citations_score,industry_income Score,international Outlook Score
+rank,name,country,number_of_students,student_per_staff,international_students,famale_male_ratio,overall_score,teaching_score,research_score,citations_score,industry_income_score,international_outlook_score
 1,University of Oxford,United Kingdom,20965,10.6,42,48,96.4,92.3,99.7,99.0,74.9,96.2
 2,Harvard University,United States,21887,9.6,25,50,95.2,94.8,99.0,99.3,49.5,80.5
 3,University of Cambridge,United Kingdom,20185,11.3,39,47,94.8,90.9,99.5,97.0,54.2,95.8
