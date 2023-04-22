@@ -7,7 +7,7 @@
 
 <h2> Table of Contents </h2>
 
-- [1. Scraping data / Lấy dữ liệu](#1-scraping-data--lấy-dữ-liệu)
+- [1. Xác định mục tiêu / Goal](#1-xác-định-mục-tiêu--goal)
 - [2. Requirements / Yêu cầu](#2-requirements--yêu-cầu)
 - [3. Setup / Cài đặt](#3-setup--cài-đặt)
 - [4. References / Nguồn tham khảo](#4-references--nguồn-tham-khảo)
@@ -23,7 +23,7 @@
   - [6.6. Xuất dữ liệu ra file csv / Export data to csv file](#66-xuất-dữ-liệu-ra-file-csv--export-data-to-csv-file)
 - [7. Phân tích dữ liệu / Data analysis](#7-phân-tích-dữ-liệu--data-analysis)
 
-## 1. Scraping data / Lấy dữ liệu
+## 1. Xác định mục tiêu / Goal
 
 Dữ liệu được lấy từ:
 
