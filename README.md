@@ -62,7 +62,7 @@ python main.py
 
 Khi có được dữ liệu thô, chọn một định dạng lưu trữ dữ liệu phù hợp và sau đó thực hiện phân tích và đồ thị hóa dữ liệu.
 
-Và cuối cùng là nếu vẫn còn thời gian sẽ thực hiện việc tạo app dashboard để hiển thị dữ liệu.
+Và cuối cùng là nếu vẫn còn thời gian sẽ thực hiện việc tạo app dashboard để hiển thị dữ liệu và đồ thị hóa.
 
 <details>
 <summary>English</summary>
@@ -455,3 +455,4 @@ df.to_csv('times_higher_education.csv', index=False)
 ```
 
 ## 7. Phân tích dữ liệu / Data analysis
+
