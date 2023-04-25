@@ -41,18 +41,15 @@ Dữ liệu được lấy từ:
 python -m venv env
 env/bin/activate.bat
 pip install -r requirements.txt
-python main.py
+python app.py
 ```
 
 ## 4. References / Nguồn tham khảo
 
-- [lkuffo/web-scraping](https://github.com/lkuffo/web-scraping)
 - [KateMzz/UUniversity_ranks](https://github.com/KateMzz/University_ranks)
 - [lauren-safwat/World-University-Rankings-Dashboard](lauren-safwat/World-University-Rankings-Dashboard)
-- [Minglokyam/University_rankings](https://github.com/Minglokyam/University_rankings)
 - [razekmh/World-University-Rankings-Table](https://github.com/razekmh/World-University-Rankings-Table)
 - [glhr/dash-university-rankings](https://github.com/glhr/dash-university-rankings)
-- [Unicorn Company Web Scraping Tutorial Using Python Beautiful Soup](https://www.youtube.com/@havingfunwithdata.88/playlists)
 
 ## 5. How I did it? / Chúng tôi đã làm như thế nào?
 
@@ -159,11 +156,11 @@ Nếu muốn sử dụng trình duyệt khác, bạn có thể tham khảo link 
 
 Tuy nhiên từ Selenium4 trở đi, `executable_path` đã không còn được sử dụng nữa. Thay vào đó, chúng ta sẽ sử dụng `service` để chỉ định đường dẫn tới `webdriver`:
 
-````python
+```python
 from selenium.webdriver.chrome.service import Service
 
 service = Service(executable_path=webdriver_path)
-````
+```
 
 Sau khi đã có được `webdriver`, chúng ta cần xác định những địa chỉ web sẽ sử dụng. Kiểm tra nhanh địa chỉ web mục tiêu cho thấy việc thay đổi giá trị tham số `length` thành `-1` sẽ dẫn đến việc có được trang web chứa tất cả các trường đại học thay vì chỉ 25 trên mỗi trang web như những gì mặc định mà ta thấy ở bên trên. Bên cạnh đó, bảng xếp hạng còn được chia thành 2 tab `Socre` và `Ranking` với nhiều dữ liệu hơn. Chúng ta sẽ lấy dữ liệu từ cả 2 tab này.
 
@@ -171,7 +168,7 @@ Sau khi đã có được `webdriver`, chúng ta cần xác định những đ�
 url_score = 'https://www.timeshighereducation.com/world-university-rankings/2023/world-ranking#!/page/0/length/-1/sort_by/rank/sort_order/asc/cols/scores'
 
 url_stats = 'https://www.timeshighereducation.com/world-university-rankings/2023/world-ranking#!/page/0/length/-1/sort_by/rank/sort_order/asc/cols/stats'
-````
+```
 
 <details>
 <summary>English</summary>
@@ -303,7 +300,6 @@ For example, determining the object, using the `Inspect` of the browser and sele
 
 It is easy to see that the object to be collected belongs to the tag `td` and has the class `rank sorting_1 sorting_2`. Do the same for the remaining columns.
 
-
 Once we have the HTML objects, we can start extracting data from them. Use pandas to create a dataframe and export data to csv, excel, json, ...
 
 </details>
@@ -364,7 +360,6 @@ Previously, the first thing to do is to create an empty dataframe, then add colu
 ```
 
 </details>
-
 
 ### 6.5. Làm sạch dữ liệu / Clean data
 
@@ -455,4 +450,3 @@ df.to_csv('times_higher_education.csv', index=False)
 ```
 
 ## 7. Phân tích dữ liệu / Data analysis
-

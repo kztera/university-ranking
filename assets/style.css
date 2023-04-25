@@ -6,8 +6,8 @@ body {
 /* HEADER */
 .header {
   background-color: #222222;
-  height: 288px;
-  padding: 16px 0 0 0;
+  height: 400px;
+  padding: 10px 0 0 0;
 }
 
 .header-emoji {
@@ -31,11 +31,12 @@ body {
   max-width: 550px;
   font-size: 20px;
 }
-
+/* BODY */
 .center {
   display: block;
   margin-left: auto;
   margin-right: auto;
+  margin-top: 0;
 }
 
 .source {
@@ -62,13 +63,13 @@ body {
   display: flex;
   justify-content: space-evenly;
   padding-top: 24px;
-  margin: -80px auto 0 auto;
+  margin: -70px auto 0 auto;
   background-color: #ffffff;
   box-shadow: 0 4px 6px 0 rgba(0, 0, 0, 0.18);
 }
 
 .Select-control {
-  width: 256px;
+  width: 200px;
   height: 48px;
 }
 
@@ -85,4 +86,18 @@ body {
   margin-bottom: 6px;
   font-weight: bold;
   color: #079a82;
+}
+
+.graph {
+  margin-top: 20px;
+}
+
+.linechart-input-box {
+  height: 912px;
+  width: 200px;
+  display: flex;
+  justify-content: space-evenly;
+  padding-top: 24px;
+  margin-left: 20px;
+  background-color: #9effa0;
 }
