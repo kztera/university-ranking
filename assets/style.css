@@ -39,10 +39,6 @@ body {
   margin-top: 0;
 }
 
-.source {
-  text-align: right !important;
-}
-
 .wrapper {
   margin-right: auto;
   margin-left: auto;
@@ -59,7 +55,7 @@ body {
 
 .menu {
   height: 112px;
-  width: 912px;
+  width: 1000px;
   display: flex;
   justify-content: space-evenly;
   padding-top: 24px;
@@ -69,7 +65,7 @@ body {
 }
 
 .Select-control {
-  width: 200px;
+  width: 222px;
   height: 48px;
 }
 
@@ -95,9 +91,27 @@ body {
 .linechart-input-box {
   height: 912px;
   width: 200px;
-  display: flex;
+  display: inline-block;
   justify-content: space-evenly;
   padding-top: 24px;
   margin-left: 20px;
   background-color: #9effa0;
+}
+
+.container {
+  margin-top: -70px;
+}
+
+.title-chart {
+  color: #ffffff;
+  font-size: 30px;
+  font-weight: bold;
+  text-align: center;
+  margin: 10px auto 0 auto;
+}
+
+.title-container {
+  background-color: #222222;
+  height: 150px;
+  margin-top: -10px;
 }

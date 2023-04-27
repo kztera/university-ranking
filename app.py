@@ -13,16 +13,17 @@ import pandas as pd
 # Load Data
 data_2023 = pd.read_csv("data\world_university_ranking_2023.csv")
 data_2022 = pd.read_csv("data\world_university_ranking_2022.csv")
+data_2016_2023 = pd.read_csv("data/university_ranking_2016_2023.csv")
 
 # data
 add_column_continent(data_2022)
 add_column_continent(data_2023)
 
+uni_names = data_2016_2023['name'].unique()
 continents = ['world', 'Africa', 'Asia', 'Australia', 'Europe', 'North America', 'South America']
 years = [2023, 2022, 2021, 2020, 2019, 2018, 2017, 2016]
 treemap_allocation_choice = ["number_of_students", "overall_score", "teaching_score", "research_score",	"citations_score",	"industry_income_score", "international_outlook_score"]
 treemap_with_choice = ["overall_score", "teaching_score", "research_score",	"citations_score",	"industry_income_score", "international_outlook_score"]
-
 
 '''
 Columns of the Data:
@@ -82,7 +83,7 @@ app.layout = html.Div(
       className="header",
     ),
     html.Div(
-    children=[
+      children=[
         html.Div(
             children=[
                 html.Div(children="Continent", className="menu-title"),
@@ -93,9 +94,9 @@ app.layout = html.Div(
                       for continent in continents
                     ],
                     searchable=False,
-                    value="world",
-                    clearable=False,
+                    value=[],
                     className="dropdown",
+                    multi=True
                 ),
             ]
         ),
@@ -160,27 +161,100 @@ app.layout = html.Div(
     ],
     className="menu",
   ),
-    dcc.Graph(
-      id="my-graph",
-      figure=fig,
-      className='graph treemap'
-    )
+  dcc.Graph(
+    id="my-graph",
+    figure=fig,
+    className='graph treemap'
+  ),
+  html.Div(
+    children=[
+      html.P(
+        children=[
+            html.Br(),
+            html.P(
+              children="University Ranking by Year",
+              className="title-chart",
+            ),
+        ]
+      )
+    ],
+    className="title-container",
+  ),
+  html.Div(
+    children=[
+        html.Div(
+            children=[
+                html.Div(children="University name", className="menu-title"),
+                dcc.Dropdown(
+                    id="name-filter",
+                    options=[
+                      {"label": name, "value": name}
+                      for name in uni_names
+                    ],
+                    clearable=True,
+                    value=['Massachusetts Institute of Technology', 'Stanford University', 'University of Oxford'],
+                    className="dropdown",
+                    multi=True
+                ),
+            ]
+        ),
+        html.Div(
+            children=[
+                html.Div(children="Start year", className="menu-title"),
+                dcc.Dropdown(
+                    id="start-year-filter",
+                    options=[
+                      {
+                        "label": year,
+                        "value": year
+                      } for year in years
+                    ],
+                    value=2016,
+                    searchable=False,
+                    className="dropdown",
+                    clearable=False
+                ),
+            ],
+        ),
+        html.Div(
+            children=[
+                html.Div(
+                    children="End year", className="menu-title"
+                ),
+                dcc.Dropdown(
+                  id="end-year-filter",
+                  options=[
+                      {
+                        "label": year,
+                        "value": year
+                      } for year in years
+                  ],
+                  value=2023,
+                  searchable=False,
+                  clearable=False,
+                  className="dropdown",
+                ),
+            ],
+        ),
+    ],
+    className="menu container",
+  ),
+  html.Div(
+    children=[
+      dcc.Graph(
+        id="my-graph-2",
+        figure=fig_linechart,
+        className='graph linechart'
+      ),
+    ],
+    className="linechart",
+  ),
   ],
-    # html.Div(
-    #   children=[  
-    #   ],
-    #   className="linechart-input-box",
-    # ),
-    # dcc.Graph(
-    #   id="linechart-graph",
-    #   figure=fig_linechart,
-    #   className='graph linechart'
-    # )
 )
 
 @app.callback(
   Output("my-graph", "figure"),
-  Input("continent-filter", "value"),
+  [Input("continent-filter", "value")],
   Input("allocation-by-filter", "value"),
   Input("color-filter", "value"),
   Input("year-filter", "value"),
@@ -189,7 +263,7 @@ app.layout = html.Div(
 def update_charts(continent, allocation, colorFilter, year):
   df = pd.read_csv(f'data/world_university_ranking_{year}.csv')
   add_column_continent(df)
-  if continent == 'world':
+  if continent == [] or continent == ['world'] or 'world' in continent:
     fig = px.treemap(
       df,
       path=[px.Constant("world"),'continent', 'country'],
@@ -197,12 +271,13 @@ def update_charts(continent, allocation, colorFilter, year):
       color=colorFilter,
       hover_data=['country', f'{allocation}', f'{colorFilter}'],
       color_continuous_scale='RdBu',
+      template='plotly_white',
       color_continuous_midpoint=np.average(df[f'{colorFilter}'], weights=df[f'{allocation}'])
   )
   else:
     fig = px.treemap(
-      df[df['continent'] == continent],
-      path=[px.Constant('continent'),'country'],
+      df[df['continent'].isin(continent)],
+      path=[px.Constant('world'),'continent','country'],
       values=allocation,
       color=colorFilter,
       hover_data=['country', f'{allocation}', f'{colorFilter}'],
@@ -211,6 +286,32 @@ def update_charts(continent, allocation, colorFilter, year):
   )
   fig.update_layout(margin = dict(t=30, l=25, r=25, b=25))
   return fig
+
+@app.callback(
+  Output("my-graph-2", "figure"),
+  [Input("name-filter", "value")],
+  Input("start-year-filter", "value"),
+  Input("end-year-filter", "value"),
+)
+
+def update_charts_2(name, start_year, end_year):
+  year = [i for i in range(start_year, end_year+1)]
+  if name == []:
+    fig_linechart = px.line(data_2016_2023, x='year', y='rank', color='name', hover_data=['name', 'rank', 'year'], color_discrete_sequence=px.colors.qualitative.Pastel, template='plotly_white',)
+  else:
+    df = data_2016_2023[data_2016_2023['name'].isin(name) & data_2016_2023['year'].isin(year)]
+    fig_linechart = px.line(df, x='year', y='rank', color='name', markers=True, hover_data=['name', 'rank', 'year'], color_discrete_sequence=px.colors.qualitative.Pastel, template='plotly_white', symbol='name')
+
+  fig_linechart.update_layout(
+    xaxis_title='Year',
+    yaxis_title='Rank',
+    font=dict(
+        family="Lato, sans-serif",
+        size=14,
+    ),
+    margin=dict(t=30, l=25, r=25, b=25),
+  )
+  return fig_linechart
 
 if __name__ == "__main__":
   app.run_server(debug=True)
