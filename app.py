@@ -24,7 +24,7 @@ continents = ['world', 'Africa', 'Asia', 'Australia', 'Europe', 'North America',
 years = [2023, 2022, 2021, 2020, 2019, 2018, 2017, 2016]
 treemap_allocation_choice = ["number_of_students", "overall_score", "teaching_score", "research_score",	"citations_score",	"industry_income_score", "international_outlook_score"]
 treemap_with_choice = ["overall_score", "teaching_score", "research_score",	"citations_score",	"industry_income_score", "international_outlook_score"]
-
+linechart_sort_by = ["rank", "number_of_students", "overall_score", "teaching_score", "research_score",	"citations_score",	"industry_income_score", "international_outlook_score"]
 '''
 Columns of the Data:
   - rank: xếp hạng của trường đại học
@@ -199,6 +199,22 @@ app.layout = html.Div(
             ]
         ),
         html.Div(
+          children=[
+            html.Div(children="Sort by", className="menu-title"),
+            dcc.Dropdown(
+              id="sort-by-filter",
+              options=[
+                {"label": choice, "value": choice}
+                for choice in linechart_sort_by
+              ],
+              value="rank",
+              searchable=False,
+              clearable=False,
+              className="dropdown",
+            )
+          ]
+        ),
+        html.Div(
             children=[
                 html.Div(children="Start year", className="menu-title"),
                 dcc.Dropdown(
@@ -290,21 +306,23 @@ def update_charts(continent, allocation, colorFilter, year):
 @app.callback(
   Output("my-graph-2", "figure"),
   [Input("name-filter", "value")],
+  Input("sort-by-filter", "value"),
   Input("start-year-filter", "value"),
   Input("end-year-filter", "value"),
 )
 
-def update_charts_2(name, start_year, end_year):
+def update_charts_2(name, sort_by, start_year, end_year):
   year = [i for i in range(start_year, end_year+1)]
   if name == []:
     fig_linechart = px.line(data_2016_2023, x='year', y='rank', color='name', hover_data=['name', 'rank', 'year'], color_discrete_sequence=px.colors.qualitative.Pastel, template='plotly_white',)
   else:
     df = data_2016_2023[data_2016_2023['name'].isin(name) & data_2016_2023['year'].isin(year)]
-    fig_linechart = px.line(df, x='year', y='rank', color='name', markers=True, hover_data=['name', 'rank', 'year'], color_discrete_sequence=px.colors.qualitative.Pastel, template='plotly_white', symbol='name')
+    fig_linechart = px.line(df, x='year', y=f'{sort_by}', color='name', markers=True, hover_data=["rank", "number_of_students", "overall_score", "teaching_score", "research_score",	"citations_score",	"industry_income_score", "international_outlook_score", "year"], color_discrete_sequence=px.colors.qualitative.Pastel, template='plotly_white', symbol='name') 
+    # fig_linechart = px.line(df, x='year', y='rank', color='name', markers=True, hover_data=['name', 'rank', 'year'], color_discrete_sequence=px.colors.qualitative.Pastel, template='plotly_white', symbol='name')
 
   fig_linechart.update_layout(
     xaxis_title='Year',
-    yaxis_title='Rank',
+    yaxis_title=f'{sort_by}',
     font=dict(
         family="Lato, sans-serif",
         size=14,

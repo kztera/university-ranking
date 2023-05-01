@@ -19,9 +19,6 @@ import plotly.express as px
 # # Merge all the dataframes into one
 # df = pd.concat([df_2016, df_2017, df_2018, df_2019, df_2020, df_2021, df_2022, df_2023])
 
-# # Remove all column just keep rank, name and year
-# df = df[['rank', 'name', 'year']]
-
 # # export to csv
 # df.to_csv('data/university_ranking_2016_2023.csv', index=False)
 
