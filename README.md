@@ -80,7 +80,8 @@ And finally, if there is still time, I will create a dashboard app to display da
   - [x] Collect + parse data: BeautifulSoup
   - [x] Lọc lấy những object cần thiết(ở đây là nội dung thuộc tag `<table>`): BeautifulSoup
 - [x] Lựa chọn định dạng lưu trữ dữ liệu phù hợp: JSON, CSV, Excel
-- [ ] Phân tích và đồ thị hóa dữ liệu
+- [x] Phân tích và đồ thị hóa dữ liệu
+- [x] Sử dụng `dash` tạo app hiển thị dữ liệu và đồ thị hóa.
 
 <details>
 
@@ -92,8 +93,8 @@ And finally, if there is still time, I will create a dashboard app to display da
   - [x] Collect + parse data: BeautifulSoup
   - [x] Filter to get the necessary objects (in this case, the contents of the `<table>` tag): BeautifulSoup
 - [x] Select an appropriate data storage format: JSON
-- [ ] Data analysis and graphing
-
+- [x] Data analysis and graphing
+- [x] Use `dash` to create an app to display data and graphing.
 </details>
 
 ## 6. Explain step by step / Giải thích từng bước
@@ -433,7 +434,7 @@ It is easy to see that the `Rank` column has some values like:
 
 We will remove the `=` character, and `+` character, separately, those values with `-` we will only take to before the `-` to be able to convert the `rank` column to a numeric data type.
 
-This also happens in the `Overall_score` column.
+This also happens in the `overall_score` column.
 
 And finally, the appearance of `n/a` values in the columns, we need to replace them with the NaN value of the `numpy` library.
 
@@ -450,3 +451,100 @@ df.to_csv('times_higher_education.csv', index=False)
 ```
 
 ## 7. Phân tích dữ liệu / Data analysis
+
+Đọc dữ liệu:
+
+```python
+import pandas as pd
+
+df = pd.read_csv('data/world_university_ranking_2023.csv')
+
+# gồm các cột ['rank', 'name', 'country', 'number_of_students', 'student_per_staff', 'international_students', 'famale_male_ratio', 'overall_score', 'teaching_score', 'research_score', 'citations_score', 'industry_income_score', 'international_outlook_score']
+
+```
+
+Có nhiều hướng để phân tích một file dữ liệu trên:
+
+- Tìm các trường đại học hàng đầu ở mỗi quốc gia bằng cách nhóm dữ liệu theo quốc gia và sau đó tìm các trường đại học có điểm tổng thể cao nhất/rank cao nhất:
+
+```python
+df.groupby('country').apply(lambda x: x.nlargest(1, 'overall_score'))
+```
+
+- So sánh số lượng trường đại học của mỗi quốc gia lọt top:
+
+```python
+df['country'].value_counts()
+```
+
+- Xác định các yếu tố góp phần vào xếp hạng của một trường đại học. Bạn có thể làm điều này bằng cách chạy phân tích thống kê trên dữ liệu. Ví dụ: bạn có thể sử dụng mô hình hồi quy để dự đoán xếp hạng của trường đại học dựa trên tỷ lệ sinh viên trên nhân viên, số lượng sinh viên quốc tế và kết quả nghiên cứu.
+
+```python
+import statsmodels.api as sm
+
+X = df[['overall_score', 'research_score', 'citations_score']]
+y = df['rank']
+
+# tạo mô hình
+model = sm.OLS(y, X)
+
+# fit mô hình
+results = model.fit()
+
+print(results.summary())
+```
+
+- So sánh xếp hạng, hiệu số của các trường theo thời gian. Từ đó nhận thấy được xu hướng tăng giảm của dữ liệu đồng thời cho thấy sự phát triển của các trường đại học.
+
+Và một trong những cách khác chính là sử dụng công cụ trực quan hóa dữ liệu ví dụ như sử dụng biểu đồ. Ở đây, chúng ta sẽ sử dụng thư viện `plotly` để vẽ biểu đồ và `dash` để tạo data apps.
+
+<details>
+
+<summary>English</summary>
+
+Read data:
+
+```python
+import pandas as pd
+
+df = pd.read_csv('data/world_university_ranking_2023.csv')
+
+```
+
+There are many ways to analyze a data file:
+
+- Find the top universities in each country by grouping the data by country and then finding the universities with the highest overall score / highest rank:
+
+```python
+df.groupby('country').apply(lambda x: x.nlargest(1, 'overall_score'))
+```
+
+- Compare the number of universities in each country in the top:
+
+```python
+df['country'].value_counts()
+```
+
+- Identify the factors contributing to the ranking of a university. You can do this by running statistical analysis on the data. For example: you can use a regression model to predict the ranking of a university based on the student-to-staff ratio, the number of international students and the research results.
+
+```python
+import statsmodels.api as sm
+
+X = df[['overall_score', 'research_score', 'citations_score']]
+
+y = df['rank']
+
+# create model
+model = sm.OLS(y, X)
+
+# fit model
+results = model.fit()
+
+print(results.summary())
+```
+
+- Compare the ranking, difference of schools over time. From there, we can see the trend of increase and decrease of the data and at the same time show the development of universities.
+
+And one of the other ways is to use data visualization tools such as using charts. Here, we will use the `plotly` library to draw charts and `dash` to create data apps.
+
+</details>
