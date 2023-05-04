@@ -8,13 +8,13 @@
 <h2> Table of Contents </h2>
 
 - [1. Xác định mục tiêu / Goal](#1-xác-định-mục-tiêu--goal)
-- [2. Requirements / Yêu cầu](#2-requirements--yêu-cầu)
+- [2. Yêu cầu / Requirements](#2-yêu-cầu--requirements)
 - [3. Setup / Cài đặt](#3-setup--cài-đặt)
-- [4. References / Nguồn tham khảo](#4-references--nguồn-tham-khảo)
-- [5. How I did it? / Chúng tôi đã làm như thế nào?](#5-how-i-did-it--chúng-tôi-đã-làm-như-thế-nào)
-  - [5.1. Ideas / Ý tưởng](#51-ideas--ý-tưởng)
+- [4. Nguồn tham khảo / References](#4-nguồn-tham-khảo--references)
+- [5. Chúng tôi đã làm như thế nào? / How we did it?](#5-chúng-tôi-đã-làm-như-thế-nào--how-we-did-it)
+  - [5.1. Ý tưởng / Ideas](#51-ý-tưởng--ideas)
   - [5.2. TODO](#52-todo)
-- [6. Explain step by step / Giải thích từng bước](#6-explain-step-by-step--giải-thích-từng-bước)
+- [6. Giải thích từng bước / Explain step by step](#6-giải-thích-từng-bước--explain-step-by-step)
   - [6.1. Dữ liệu mà chúng ta sẽ lấy / The data we will collect](#61-dữ-liệu-mà-chúng-ta-sẽ-lấy--the-data-we-will-collect)
   - [6.2. Phân tích cấu trúc và tìm kiếm giải pháp / Analyze structure and search for solutions](#62-phân-tích-cấu-trúc-và-tìm-kiếm-giải-pháp--analyze-structure-and-search-for-solutions)
   - [6.3. Lấy dữ liệu / Get data](#63-lấy-dữ-liệu--get-data)
@@ -29,7 +29,7 @@ Dữ liệu được lấy từ:
 
 - **Times Higher Education - World University Rankings:** https://www.timeshighereducation.com/world-university-rankings/2023/world-ranking
 
-## 2. Requirements / Yêu cầu
+## 2. Yêu cầu / Requirements
 
 - [Beautiful Soup](http://www.crummy.com/software/BeautifulSoup/bs4/), và [JSON](https://docs.python.org/3/library/json.html) cho việc lấy dữ liệu, phân tích và trích xuất dữ liệu
 - [Selenium](https://selenium-python.readthedocs.io/) cho việc điều khiển trình duyệt tự động cũng như tạo cơ hội cho code Js chạy
@@ -44,16 +44,16 @@ pip install -r requirements.txt
 python app.py
 ```
 
-## 4. References / Nguồn tham khảo
+## 4. Nguồn tham khảo / References
 
 - [KateMzz/UUniversity_ranks](https://github.com/KateMzz/University_ranks)
 - [lauren-safwat/World-University-Rankings-Dashboard](lauren-safwat/World-University-Rankings-Dashboard)
 - [razekmh/World-University-Rankings-Table](https://github.com/razekmh/World-University-Rankings-Table)
 - [glhr/dash-university-rankings](https://github.com/glhr/dash-university-rankings)
 
-## 5. How I did it? / Chúng tôi đã làm như thế nào?
+## 5. Chúng tôi đã làm như thế nào? / How we did it?
 
-### 5.1. Ideas / Ý tưởng
+### 5.1. Ý tưởng / Ideas
 
 Ý tưởng ban đầu là lấy dữ liệu từ trang `timeshighereducation.com` về Thứ tự xếp hạng các trường đại học trên toàn thế giới.
 
@@ -97,7 +97,7 @@ And finally, if there is still time, I will create a dashboard app to display da
 - [x] Use `dash` to create an app to display data and graphing.
 </details>
 
-## 6. Explain step by step / Giải thích từng bước
+## 6. Giải thích từng bước / Explain step by step
 
 ### 6.1. Dữ liệu mà chúng ta sẽ lấy / The data we will collect
 
