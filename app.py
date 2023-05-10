@@ -265,6 +265,9 @@ app.layout = html.Div(
     ],
     className="linechart",
   ),
+  html.Div(
+    className="title-container",
+  ),
   ],
 )
 
