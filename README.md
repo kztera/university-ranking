@@ -29,6 +29,9 @@ Dữ liệu được lấy từ:
 
 - **Times Higher Education - World University Rankings:** https://www.timeshighereducation.com/world-university-rankings/2023/world-ranking
 
+Quy trình thực hiện:
+![flowchart](cacBuocCaoDuLieu.png)
+
 ## 2. Yêu cầu / Requirements
 
 - [Beautiful Soup](http://www.crummy.com/software/BeautifulSoup/bs4/), và [JSON](https://docs.python.org/3/library/json.html) cho việc lấy dữ liệu, phân tích và trích xuất dữ liệu
