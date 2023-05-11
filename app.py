@@ -317,7 +317,7 @@ def update_charts(continent, allocation, colorFilter, year):
 def update_charts_2(name, sort_by, start_year, end_year):
   year = [i for i in range(start_year, end_year+1)]
   if name == []:
-    fig_linechart = px.line(data_2016_2023, x='year', y='rank', color='name', hover_data=['name', 'rank', 'year'], color_discrete_sequence=px.colors.qualitative.Pastel, template='plotly_white',)
+    fig_linechart = px.line(data_2016_2023, x='year', y=f'{sort_by}', color='name', hover_data=['name', 'rank', 'year'], color_discrete_sequence=px.colors.qualitative.Pastel, template='plotly_white',)
   else:
     df = data_2016_2023[data_2016_2023['name'].isin(name) & data_2016_2023['year'].isin(year)]
     fig_linechart = px.line(df, x='year', y=f'{sort_by}', color='name', markers=True, hover_data=["rank", "number_of_students", "overall_score", "teaching_score", "research_score",	"citations_score",	"industry_income_score", "international_outlook_score", "year"], color_discrete_sequence=px.colors.qualitative.Pastel, template='plotly_white', symbol='name') 
