@@ -11,8 +11,8 @@ dash.html: HTML Tags
 import pandas as pd
 
 # Load Data
-data_2023 = pd.read_csv("data\world_university_ranking_2023.csv")
-data_2022 = pd.read_csv("data\world_university_ranking_2022.csv")
+data_2023 = pd.read_csv("data/world_university_ranking_2023.csv")
+data_2022 = pd.read_csv("data/world_university_ranking_2022.csv")
 data_2016_2023 = pd.read_csv("data/university_ranking_2016_2023.csv")
 
 # data
