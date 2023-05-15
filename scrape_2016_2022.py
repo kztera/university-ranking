@@ -118,7 +118,7 @@ while (year < 2023):
   df = df.replace('n/a*', np.nan, regex=True)
   
   # xuất dữ liệu ra file csv
-  df.to_csv(f'data/world_university_ranking_{year}.csv', index=False)
+  df.to_csv(f'src/data/world_university_ranking_{year}.csv', index=False)
 
   year += 1
 
