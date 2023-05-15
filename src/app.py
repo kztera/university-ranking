@@ -56,6 +56,7 @@ image_path = 'assets/logo.png'
 
 # Create Application
 app = Dash(__name__, external_stylesheets=external_stylesheets)
+server = app.server
 app.title = "World University Rankings 2022 - 2023"
 
 # Create Layout
