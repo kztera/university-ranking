@@ -91,7 +91,7 @@ body {
 .linechart-input-box {
   height: 912px;
   width: 200px;
-  display: inline-block;
+  display: flex;
   justify-content: space-evenly;
   padding-top: 24px;
   margin-left: 20px;
